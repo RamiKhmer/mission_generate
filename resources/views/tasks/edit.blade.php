@@ -15,8 +15,16 @@
     <form action="{{ route('tasks.update', $task) }}" method="POST">
         @csrf
         @method('PUT')
-        <input type="text" name="title" value="{{ $task->title }}" required>
-        <textarea name="description">{{ $task->description }}</textarea>
+
+        <div class="mb-3">
+            <label for="ref" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" value="{{ $task->title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="ref" class="form-label">Descripiton</label>
+            <textarea name="description" class="form-control">{{ $task->description }}</textarea>
+        </div>
         <!-- New fields -->
         <div class="mb-3">
             <label for="ref" class="form-label">Ref</label>
@@ -86,10 +94,12 @@
 
 
 
-        <button type="submit">Update</button>
+        <button type="submit" class="form-control btn btn-primary">Update</button>
     </form>
 
-
+    <br>
+    <br>
+    <br>
     <script>
         let personIndex = {{ $task->people->count() }};
 

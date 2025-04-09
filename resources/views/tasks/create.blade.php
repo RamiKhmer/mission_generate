@@ -14,8 +14,14 @@
 
     <form action="{{ route('tasks.store') }}" method="POST">
         @csrf
-        <input type="text" name="title" placeholder="Title" required>
-        <textarea name="description" placeholder="Description"></textarea>
+        <div class="mb-3">
+            <label for="ref" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" placeholder="Title" required>
+        </div>
+        <div class="mb-3">
+            <label for="ref" class="form-label">Description</label>
+            <textarea name="description" class="form-control" placeholder="Description"></textarea>
+        </div>
 
         <!-- New fields -->
         <div class="mb-3">
@@ -74,9 +80,12 @@
         </div>
         <button type="button" class="btn btn-secondary mb-3" onclick="addPersonFields()">+ Add Person</button>
 
-        <button type="submit">Save</button>
+        <button type="submit" class="form-control btn btn-primary">Save</button>
     </form>
 
+    <br>
+    <br>
+    <br>
     <script>
         let personIndex = 1;
 

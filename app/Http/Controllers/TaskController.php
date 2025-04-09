@@ -4,12 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use KhmerDateTime\KhmerDateTime;   
+
+use Carbon\Carbon;
+use Chanthorn\CarbonKh\ToKhmerDate;
 
 class TaskController extends Controller
 {
     public function index()
     {
         $tasks = Task::latest()->paginate(5);
+        // Optional: Format Khmer date for each task
+        foreach ($tasks as $task) {
+            $task->khmer_date = KhmerDateTime::parse($task->datesign)->format("LLLL");
+        }
+
+        foreach ($tasks as $task) {
+            $date = Carbon::parse($task->datesign);
+            $khmerDate = new ToKhmerDate($date);
+            $task->luna_date = $khmerDate::format('dN ថ្ងៃW ខែm ព.ស. b');
+        }
+
         return view('tasks.index', compact('tasks'));
     }
 
